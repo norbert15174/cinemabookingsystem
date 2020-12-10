@@ -13,6 +13,59 @@ public class Spectator {
     private String email;
     private String name;
     private String surname;
+    private boolean isBook;
     @ManyToOne
     private FilmShow filmShow;
+
+    public long getId() {
+        return id;
+    }
+
+    public long getSeat() {
+        return seat;
+    }
+
+    public void setSeat(long seat) {
+        this.seat = seat;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public boolean isBook() {
+        return isBook;
+    }
+
+    public void setBook(boolean book) {
+        isBook = book;
+    }
+
+    public FilmShow getFilmShow() {
+        return filmShow;
+    }
+
+    public void setFilmShow(FilmShow filmShow) {
+        this.filmShow = filmShow;
+    }
 }

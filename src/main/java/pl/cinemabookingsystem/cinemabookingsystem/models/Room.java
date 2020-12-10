@@ -7,6 +7,9 @@ import javax.persistence.Id;
 
 @Entity
 public class Room {
+    public Room() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -14,6 +17,10 @@ public class Room {
 
     public long getId() {
         return id;
+    }
+
+    public Room(long numberOfSeats) {
+        this.numberOfSeats = numberOfSeats;
     }
 
     public void setId(long id) {
