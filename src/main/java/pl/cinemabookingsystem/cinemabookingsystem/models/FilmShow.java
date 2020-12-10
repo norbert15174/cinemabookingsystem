@@ -2,6 +2,7 @@ package pl.cinemabookingsystem.cinemabookingsystem.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,8 +15,8 @@ public class FilmShow {
     private Room room;
     @OneToOne
     private Movie movie;
-    private LocalDate dateStart;
-    private LocalDate dateEnd;
+    private LocalDateTime dateStart;
+    private LocalDateTime dateEnd;
     @OneToMany(mappedBy = "filmShow")
     private Set<Spectator> spectators = new HashSet<>();
 
@@ -46,19 +47,19 @@ public class FilmShow {
         this.movie = movie;
     }
 
-    public LocalDate getDateStart() {
+    public LocalDateTime getDateStart() {
         return dateStart;
     }
 
-    public void setDateStart(LocalDate dateStart) {
+    public void setDateStart(LocalDateTime dateStart) {
         this.dateStart = dateStart;
     }
 
-    public LocalDate getDateEnd() {
+    public LocalDateTime getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(LocalDate dateEnd) {
+    public void setDateEnd(LocalDateTime dateEnd) {
         this.dateEnd = dateEnd;
     }
 

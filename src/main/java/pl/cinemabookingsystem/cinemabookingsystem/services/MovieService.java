@@ -1,6 +1,8 @@
 package pl.cinemabookingsystem.cinemabookingsystem.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,13 @@ public class MovieService {
         movieRepository.save(movie);
         return new ResponseEntity<>(movie,HttpStatus.CREATED);
     }
+    public Movie findMovieById(long id){
+        return movieRepository.findById(id).orElse(null);
+    }
 
+//    @EventListener(ApplicationReadyEvent.class)
+//    public void init(){
+//        addNewFilm("Kevin");
+//    }
 
 }
