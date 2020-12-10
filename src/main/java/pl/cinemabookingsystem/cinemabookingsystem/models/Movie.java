@@ -42,7 +42,7 @@ import javax.validation.constraints.Size;
     "Response"
 })
 @Entity
-public class Track {
+public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -114,7 +114,7 @@ public class Track {
 
     @Override
     public String toString() {
-        return "Track{" +
+        return "Movie{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", year='" + year + '\'' +

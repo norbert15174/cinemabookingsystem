@@ -16,8 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import pl.cinemabookingsystem.cinemabookingsystem.Repository.TrackRepository;
-import pl.cinemabookingsystem.cinemabookingsystem.models.Track;
+import pl.cinemabookingsystem.cinemabookingsystem.Repository.MovieRepository;
+import pl.cinemabookingsystem.cinemabookingsystem.models.Movie;
 
 
 @Controller
@@ -26,10 +26,10 @@ public class TrackController {
     @Value("${apiKey}")
     private String key;
 
-    private TrackRepository trackRepository;
+    private MovieRepository movieRepository;
     @Autowired
-    public TrackController(TrackRepository trackRepository) {
-        this.trackRepository = trackRepository;
+    public TrackController(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
     }
 
 
@@ -49,8 +49,8 @@ public class TrackController {
        //Change data type
        ObjectMapper objectMapper = new ObjectMapper();
         try {
-            Track track = objectMapper.readValue(jsonNode.toString(),Track.class);
-            trackRepository.save(track);
+            Movie movie = objectMapper.readValue(jsonNode.toString(), Movie.class);
+            movieRepository.save(movie);
             return true;
         } catch (JsonProcessingException e) {
             e.printStackTrace();

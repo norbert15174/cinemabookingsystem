@@ -12,7 +12,7 @@ public class FilmShow {
     @OneToOne
     private Room room;
     @OneToOne
-    private Track track;
+    private Movie movie;
     private LocalDate dateStart;
     private LocalDate dateEnd;
     @OneToMany(mappedBy = "filmShow")
