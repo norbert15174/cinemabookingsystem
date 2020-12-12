@@ -11,13 +11,13 @@ public class FilmShow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Room room;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Movie movie;
     private LocalDateTime dateStart;
     private LocalDateTime dateEnd;
-    @OneToMany(mappedBy = "filmShow")
+    @OneToMany(mappedBy = "filmShow", fetch = FetchType.LAZY)
     private Set<Spectator> spectators = new HashSet<>();
 
     public void addNewSpectator(Spectator spectator){

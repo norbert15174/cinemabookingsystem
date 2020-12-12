@@ -2,6 +2,7 @@ package pl.cinemabookingsystem.cinemabookingsystem.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.time.LocalTime;
 
 @Entity
 public class Spectator {
@@ -13,9 +14,19 @@ public class Spectator {
     private String email;
     private String name;
     private String surname;
-    private boolean isBook;
+    private boolean isBook = false;
+    private LocalTime localTime;
+
     @ManyToOne
     private FilmShow filmShow;
+
+    public LocalTime getLocalTime() {
+        return localTime;
+    }
+
+    public void setLocalTime(LocalTime localTime) {
+        this.localTime = localTime;
+    }
 
     public long getId() {
         return id;

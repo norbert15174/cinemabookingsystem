@@ -18,6 +18,9 @@ public interface FilmShowRepository extends JpaRepository<FilmShow,Long> {
             "and f.room.id = :id")
     Optional<List<FilmShow>> findFilmShow(@Param("dateS") LocalDateTime dateS, @Param("dateE") LocalDateTime dateE, @Param("id") long id);
 
+    @Query("select f from FilmShow f left join fetch f.spectators where f.id = :id")
+    Optional<FilmShow> findFilmShowReservation(long id);
+
 
 
 }
