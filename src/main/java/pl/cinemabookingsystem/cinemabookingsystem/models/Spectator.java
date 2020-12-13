@@ -1,5 +1,7 @@
 package pl.cinemabookingsystem.cinemabookingsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.time.LocalTime;
@@ -18,6 +20,7 @@ public class Spectator {
     private LocalTime localTime;
 
     @ManyToOne
+    @JsonIgnore
     private FilmShow filmShow;
 
     public LocalTime getLocalTime() {

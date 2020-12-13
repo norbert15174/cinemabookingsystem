@@ -17,7 +17,7 @@ public class FilmShow {
     private Movie movie;
     private LocalDateTime dateStart;
     private LocalDateTime dateEnd;
-    @OneToMany(mappedBy = "filmShow", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "filmShow", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<Spectator> spectators = new HashSet<>();
 
     public void addNewSpectator(Spectator spectator){

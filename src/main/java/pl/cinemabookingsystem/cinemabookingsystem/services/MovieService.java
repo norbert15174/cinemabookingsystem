@@ -13,6 +13,7 @@ import pl.cinemabookingsystem.cinemabookingsystem.models.CinemaUser;
 import pl.cinemabookingsystem.cinemabookingsystem.models.Movie;
 
 import javax.persistence.Entity;
+import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -38,9 +39,20 @@ public class MovieService {
         movieRepository.save(movie);
         return new ResponseEntity<>(movie,HttpStatus.CREATED);
     }
+
+    public ResponseEntity<Movie> findMovieInDB(String title){
+        Optional<Movie> movie = movieRepository.findFirstByTitle(title);
+        if(movie.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(movie.get(),HttpStatus.OK);
+    }
+
     public Movie findMovieById(long id){
         return movieRepository.findById(id).orElse(null);
     }
+
+
+
+
 
 //    @EventListener(ApplicationReadyEvent.class)
 //    public void init(){
