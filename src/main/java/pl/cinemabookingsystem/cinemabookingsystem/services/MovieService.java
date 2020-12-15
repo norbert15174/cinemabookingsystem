@@ -13,6 +13,7 @@ import pl.cinemabookingsystem.cinemabookingsystem.models.CinemaUser;
 import pl.cinemabookingsystem.cinemabookingsystem.models.Movie;
 
 import javax.persistence.Entity;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,6 +49,10 @@ public class MovieService {
 
     public Movie findMovieById(long id){
         return movieRepository.findById(id).orElse(null);
+    }
+
+    public ResponseEntity<List<Movie>> findAllMovies() {
+        return new ResponseEntity<>(movieRepository.findAll(),HttpStatus.OK);
     }
 
 

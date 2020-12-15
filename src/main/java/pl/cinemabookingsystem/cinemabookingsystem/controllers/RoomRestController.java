@@ -9,6 +9,7 @@ import pl.cinemabookingsystem.cinemabookingsystem.services.RoomService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/room")
 public class RoomRestController {
@@ -22,7 +23,7 @@ public class RoomRestController {
     public ResponseEntity<Room> addNewRoom(long roomSeat){
         return roomService.addNewRoom(roomSeat);
     }
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<Room>> findAllRooms(){
         return roomService.findAllRooms();
     }
