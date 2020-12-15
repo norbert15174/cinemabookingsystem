@@ -24,5 +24,8 @@ public interface FilmShowRepository extends JpaRepository<FilmShow,Long> {
     @Query("select f from FilmShow f left join fetch f.movie left join fetch f.room where f.id = :id")
     Optional<FilmShow> findFilmShowInformation(long id);
 
+    @Query("select f from FilmShow f left join fetch f.movie left join fetch f.room")
+    List<FilmShow> findAllFilmShow();
+
 
 }

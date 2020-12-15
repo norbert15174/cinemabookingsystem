@@ -18,6 +18,7 @@ import javax.mail.MessagingException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,7 +39,11 @@ public class FilmShowService {
         this.mailSenderService = mailSenderService;
     }
 
-
+    public ResponseEntity<List<FilmShow>> findAllFilmShow(){
+        List<FilmShow> asd = filmShowRepository.findAllFilmShow();
+        asd.forEach(a -> System.out.println(a.getId()));
+        return new ResponseEntity<>(asd,HttpStatus.OK);
+    }
 
 
 
@@ -77,7 +82,7 @@ public class FilmShowService {
         filmShowRepository.save(filmShow.get());
         String order = "Order confirmation " + spectatorId;
         try {
-            mailSenderService.sendMail(spectator.getEmail(),order,confirmation+spectatorId,true);
+            mailSenderService.sendMail(spectator.getEmail(),order,"<h2> twój kod to:" + spectatorId + "</h2>",true);
             return new ResponseEntity<>(spectator,HttpStatus.OK);
         } catch (MessagingException e) {
             System.out.println(e.getMessage());
@@ -111,21 +116,21 @@ public class FilmShowService {
 
 //    @EventListener(ApplicationReadyEvent.class)
 //    public void init(){
-//        setConfirmation(1L);
-//////        FilmShow filmShow = new FilmShow();
-//////        filmShow.setDateStart(LocalDateTime.now().plusDays(20).withNano(0));
-//////        addNewFilmShow(filmShow,1L,1L);
-////
-////        Spectator spectator = new Spectator();
-////        spectator.setEmail("faronnorbertkrk@gmail.com");
-////        spectator.setLocalTime(LocalTime.now().withNano(0));
-////        spectator.setName("Norbert");
-////        spectator.setSurname("Faron222");
-////        spectator.setSeat(33L);
-////        seatReservation(1L,spectator);
-////
-////
-////
+////        setConfirmation(1L);
+//        FilmShow filmShow = new FilmShow();
+//        filmShow.setDateStart(LocalDateTime.now().plusDays(22).withNano(0));
+//        addNewFilmShow(filmShow,1L,3L);
+//////
+//////        Spectator spectator = new Spectator();
+//////        spectator.setEmail("faronnorbertkrk@gmail.com");
+//////        spectator.setLocalTime(LocalTime.now().withNano(0));
+//////        spectator.setName("Norbert");
+//////        spectator.setSurname("Faron222");
+//////        spectator.setSeat(33L);
+//////        seatReservation(1L,spectator);
+//////
+//////
+//////
 //    }
 
 }
