@@ -9,15 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.cinemabookingsystem.cinemabookingsystem.Repository.FilmShowRepository;
 import pl.cinemabookingsystem.cinemabookingsystem.Repository.SpectatorRepository;
-import pl.cinemabookingsystem.cinemabookingsystem.models.FilmShow;
-import pl.cinemabookingsystem.cinemabookingsystem.models.Movie;
-import pl.cinemabookingsystem.cinemabookingsystem.models.Room;
-import pl.cinemabookingsystem.cinemabookingsystem.models.Spectator;
+import pl.cinemabookingsystem.cinemabookingsystem.models.*;
 
 import javax.mail.MessagingException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -112,7 +110,27 @@ public class FilmShowService {
         }
     }
 
+    public ResponseEntity<List<SpectatorDTO>> findSpectatorByEmail(String email) {
+        Optional<List<Spectator>> spectators = spectatorRepository.findSpectatorByEmail(email);
+        if(spectators.isPresent()) return new ResponseEntity(mapToSpectatorDto(spectators.get()),HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
+    public List<SpectatorDTO> mapToSpectatorDto(List<Spectator> spectators){
+        List<SpectatorDTO> spectatorDTOS = new ArrayList<>();
+        spectators.forEach(spectator -> {
+            SpectatorDTO spectatorDTO = new SpectatorDTO();
+            spectatorDTO.setEmail(spectator.getEmail());
+            spectatorDTO.setMovie(spectator.getFilmShow().getMovie().getTitle());
+            spectatorDTO.setName(spectator.getName());
+            spectatorDTO.setSurname(spectator.getSurname());
+            spectatorDTO.setRoom(spectator.getFilmShow().getRoom().getId());
+            spectatorDTO.setSeat(spectator.getSeat());
+            spectatorDTO.setStartDate(spectator.getFilmShow().getDateStart());
+            spectatorDTOS.add(spectatorDTO);
+        });
+        return spectatorDTOS;
+    }
 
 //    @EventListener(ApplicationReadyEvent.class)
 //    public void init(){

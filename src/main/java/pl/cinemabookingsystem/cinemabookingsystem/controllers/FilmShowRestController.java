@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import pl.cinemabookingsystem.cinemabookingsystem.models.FilmShow;
 import pl.cinemabookingsystem.cinemabookingsystem.models.Spectator;
+import pl.cinemabookingsystem.cinemabookingsystem.models.SpectatorDTO;
 import pl.cinemabookingsystem.cinemabookingsystem.services.FilmShowService;
 
 import java.util.List;
@@ -48,4 +49,10 @@ public class FilmShowRestController {
         filmShowService.setConfirmation(id);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @GetMapping("/reservation")
+    public ResponseEntity<List<SpectatorDTO>> findSpectatorByEmail(@RequestParam String email){
+        return filmShowService.findSpectatorByEmail(email);
+    }
+
 }
