@@ -40,20 +40,20 @@ public class FilmShowService {
     }
 
     public ResponseEntity<List<FilmShow>> findAllFilmShow(){
-        List<FilmShow> asd = filmShowRepository.findAllFilmShow();
+        List<FilmShow> asd = filmShowRepository.findAllFilmShow(LocalDateTime.now());
         asd.forEach(a -> System.out.println(a.getId()));
         return new ResponseEntity<>(asd,HttpStatus.OK);
     }
 
 
 
-    public ResponseEntity<FilmShow> addNewFilmShow(FilmShow filmShow, long roomId, long moveId){
+    public ResponseEntity<FilmShow> addNewFilmShow(FilmShow filmShow, long roomId, String title){
 
-        Movie movie = movieService.findMovieById(moveId);
+        Movie movie = movieService.findMovieInDB(title).getBody();
         Room room = roomService.findRoomById(roomId).getBody();
         if(movie == null || room == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         String[] time = movie.getRuntime().split(" ", 2);
-        filmShow.setDateEnd(filmShow.getDateStart().plusMinutes(Integer.parseInt(time[0])+20));
+        filmShow.setDateEnd(filmShow.getDateStart().withSecond(0).plusMinutes(Integer.parseInt(time[0])+20));
         if(filmShowRepository.findFilmShow(filmShow.getDateStart(),filmShow.getDateEnd(),roomId).isPresent()) return new ResponseEntity<>(HttpStatus.FOUND);
         filmShow.setMovie(movie);
         filmShow.setRoom(room);

@@ -3,6 +3,7 @@ package pl.cinemabookingsystem.cinemabookingsystem.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import pl.cinemabookingsystem.cinemabookingsystem.models.FilmShow;
@@ -10,6 +11,7 @@ import pl.cinemabookingsystem.cinemabookingsystem.models.Spectator;
 import pl.cinemabookingsystem.cinemabookingsystem.services.FilmShowService;
 
 import java.util.List;
+
 
 @CrossOrigin
 @RestController
@@ -28,8 +30,8 @@ public class FilmShowRestController {
     }
 
     @PostMapping("/addfilmshow")
-    public ResponseEntity<FilmShow> addNewFilmShow(FilmShow filmShow, long roomId, long moveId){
-        return filmShowService.addNewFilmShow(filmShow,roomId,moveId);
+    public ResponseEntity<FilmShow> addNewFilmShow(@RequestBody FilmShow filmShow,@RequestParam long roomId,@RequestParam String title){
+        return filmShowService.addNewFilmShow(filmShow,roomId,title);
     }
     @PostMapping("/seatreservation/{id}")
     public ResponseEntity<Spectator> seatReservation(@PathVariable long id,@RequestBody Spectator spectator){

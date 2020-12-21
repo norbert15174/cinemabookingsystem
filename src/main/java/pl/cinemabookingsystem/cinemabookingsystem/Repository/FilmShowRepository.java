@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import pl.cinemabookingsystem.cinemabookingsystem.models.FilmShow;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -24,8 +25,8 @@ public interface FilmShowRepository extends JpaRepository<FilmShow,Long> {
     @Query("select f from FilmShow f left join fetch f.movie left join fetch f.room where f.id = :id")
     Optional<FilmShow> findFilmShowInformation(long id);
 
-    @Query("select f from FilmShow f left join fetch f.movie left join fetch f.room")
-    List<FilmShow> findAllFilmShow();
+    @Query("select f from FilmShow f left join fetch f.movie left join fetch f.room where f.dateStart > :localDate order by f.dateStart ASC ")
+    List<FilmShow> findAllFilmShow(@Param("localDate") LocalDateTime localDate);
 
 
 }
