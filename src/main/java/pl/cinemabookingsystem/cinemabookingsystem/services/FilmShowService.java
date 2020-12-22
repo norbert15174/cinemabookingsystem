@@ -137,7 +137,7 @@ public class FilmShowService {
         LocalDate dateTo = to.isBlank() ? LocalDate.now().plusMonths(2) : LocalDate.parse(to);
         LocalDateTime localDateTimeFrom = LocalDateTime.of(dateFrom.getYear(),dateFrom.getMonth(),dateFrom.getDayOfMonth(),0,0,0,0);
         LocalDateTime localDateTimeTo = LocalDateTime.of(dateTo.getYear(),dateTo.getMonth(),dateTo.getDayOfMonth(),0,0,0,0);
-        return new ResponseEntity(filmShowRepository.findFilmShowByParameters(localDateTimeFrom,localDateTimeTo,title).get(),HttpStatus.OK);
+        return new ResponseEntity(filmShowRepository.findFilmShowByParameters(localDateTimeFrom,localDateTimeTo,title),HttpStatus.OK);
     }
 
 //    @EventListener(ApplicationReadyEvent.class)
