@@ -18,10 +18,10 @@ public class CinemaUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    private long id;
     private String username;
     private String password;
-    private Role role = Role.ROLE_USER;
+    private Role role = Role.ROLE_ADMIN;
     @Email
     private String email;
     private boolean enable = false;

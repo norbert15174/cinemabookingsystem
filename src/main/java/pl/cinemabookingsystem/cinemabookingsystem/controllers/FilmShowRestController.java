@@ -11,6 +11,8 @@ import pl.cinemabookingsystem.cinemabookingsystem.models.Spectator;
 import pl.cinemabookingsystem.cinemabookingsystem.models.SpectatorDTO;
 import pl.cinemabookingsystem.cinemabookingsystem.services.FilmShowService;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 
@@ -54,5 +56,16 @@ public class FilmShowRestController {
     public ResponseEntity<List<SpectatorDTO>> findSpectatorByEmail(@RequestParam String email){
         return filmShowService.findSpectatorByEmail(email);
     }
+
+    @GetMapping("/findfilmshow")
+    public ResponseEntity<List<FilmShow>> findFilmShow(@RequestParam(required = false) String from, @RequestParam(required = false) String to, @RequestParam(required = false) String title){
+
+
+
+
+        return filmShowService.findFilmShowByParametr(from,to,title);
+    }
+
+
 
 }

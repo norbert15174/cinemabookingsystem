@@ -132,6 +132,14 @@ public class FilmShowService {
         return spectatorDTOS;
     }
 
+    public ResponseEntity<List<FilmShow>> findFilmShowByParametr(String from, String to, String title) {
+        LocalDate dateFrom = from.isBlank() ? LocalDate.now().minusMonths(2) : LocalDate.parse(from);
+        LocalDate dateTo = to.isBlank() ? LocalDate.now().plusMonths(2) : LocalDate.parse(to);
+        LocalDateTime localDateTimeFrom = LocalDateTime.of(dateFrom.getYear(),dateFrom.getMonth(),dateFrom.getDayOfMonth(),0,0,0,0);
+        LocalDateTime localDateTimeTo = LocalDateTime.of(dateTo.getYear(),dateTo.getMonth(),dateTo.getDayOfMonth(),0,0,0,0);
+        return new ResponseEntity(filmShowRepository.findFilmShowByParameters(localDateTimeFrom,localDateTimeTo,title).get(),HttpStatus.OK);
+    }
+
 //    @EventListener(ApplicationReadyEvent.class)
 //    public void init(){
 ////        setConfirmation(1L);
