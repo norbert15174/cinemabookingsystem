@@ -34,18 +34,18 @@ public class CinemaUserService implements UserDetailsService {
         return cinemaUserRepository.findAllByUsername(s);
     }
 
-    public String login(String username, String password){
+    public String login(String username, String password) {
         UserDetails userDetails = loadUserByUsername(username);
-        if(userDetails == null) return null;
-        if(passwordEncoder.matches(password,userDetails.getPassword()) && userDetails.isEnabled()){
-            return generateJwt(username,password);
+        if (userDetails == null) return null;
+        if (passwordEncoder.matches(password, userDetails.getPassword()) && userDetails.isEnabled()) {
+            return generateJwt(username, password);
         }
         return null;
     }
 
     private String generateJwt(String username, String password) {
         Algorithm algorithm = Algorithm.HMAC512(key);
-        return JWT.create().withClaim("username", username).withClaim("password",password).sign(algorithm);
+        return JWT.create().withClaim("username", username).withClaim("password", password).sign(algorithm);
     }
 
 //    @EventListener(ApplicationReadyEvent.class)

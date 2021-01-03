@@ -15,17 +15,19 @@ import java.util.Map;
 public class AuthorizationRestController {
 
     private CinemaUserService cinemaUserService;
+
     @Autowired
     public AuthorizationRestController(CinemaUserService cinemaUserService) {
         this.cinemaUserService = cinemaUserService;
     }
+
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Map<String,String> login) {
+    public ResponseEntity<String> login(@RequestBody Map<String, String> login) {
         String username = login.get("username");
         String password = login.get("password");
         if (username.isBlank() || password.isBlank()) return new ResponseEntity(HttpStatus.BAD_REQUEST);
         String token = cinemaUserService.login(username, password);
-        if (token == null) return new ResponseEntity<>("The username or password is incorrect", HttpStatus.NOT_FOUND);
+        if (token == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
 }

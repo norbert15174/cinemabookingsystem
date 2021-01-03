@@ -25,6 +25,7 @@ public class CinemaUser implements UserDetails {
     @Email
     private String email;
     private boolean enable = true;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(role.toString()));

@@ -7,7 +7,7 @@ import pl.cinemabookingsystem.cinemabookingsystem.models.Movie;
 import java.util.Optional;
 
 @Repository
-public interface MovieRepository extends JpaRepository<Movie,Long>{
+public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     Optional<Movie> findFirstByTitle(String title);
 

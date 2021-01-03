@@ -15,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 public class MailSenderService {
 
     private JavaMailSender javaMailSender;
+
     @Autowired
     public MailSenderService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;

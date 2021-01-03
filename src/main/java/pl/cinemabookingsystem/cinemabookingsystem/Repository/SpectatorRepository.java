@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface SpectatorRepository extends JpaRepository<Spectator,Long> {
+public interface SpectatorRepository extends JpaRepository<Spectator, Long> {
 
     @Query("select s from Spectator s left join fetch s.filmShow f left join fetch f.room left join fetch f.movie where s.id = :id")
     public Optional<Spectator> findSpectatorById(@Param("id") long id);

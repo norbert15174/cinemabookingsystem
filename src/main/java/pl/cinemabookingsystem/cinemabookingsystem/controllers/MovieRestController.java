@@ -13,26 +13,29 @@ import java.util.List;
 @RequestMapping(path = "/movies")
 public class MovieRestController {
     MovieService movieService;
+
     @Autowired
     public MovieRestController(MovieService movieService) {
         this.movieService = movieService;
     }
+
     @GetMapping("/find/{title}")
-    public ResponseEntity<Movie> findNewFilm(@PathVariable String title){
+    public ResponseEntity<Movie> findNewFilm(@PathVariable String title) {
         return movieService.findNewFilm(title);
     }
+
     @GetMapping("/add/{title}")
-    public ResponseEntity<Movie> addNewFilm(@PathVariable String title){
+    public ResponseEntity<Movie> addNewFilm(@PathVariable String title) {
         return movieService.addNewFilm(title);
     }
 
     @GetMapping("/findindb/{title}")
-    public ResponseEntity<Movie> findMovieInDB(@PathVariable String title){
+    public ResponseEntity<Movie> findMovieInDB(@PathVariable String title) {
         return movieService.findMovieInDB(title);
     }
 
     @GetMapping
-    public ResponseEntity<List<Movie>> findAllMovie(){
+    public ResponseEntity<List<Movie>> findAllMovie() {
         return movieService.findAllMovies();
     }
 

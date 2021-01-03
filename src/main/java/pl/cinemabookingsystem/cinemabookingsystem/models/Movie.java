@@ -15,31 +15,31 @@ import javax.validation.constraints.Size;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "Title",
-    "Year",
-    "Rated",
-    "Released",
-    "Runtime",
-    "Genre",
-    "Director",
-    "Writer",
-    "Actors",
-    "Plot",
-    "Language",
-    "Country",
-    "Awards",
-    "Poster",
-    "Ratings",
-    "Metascore",
-    "imdbRating",
-    "imdbVotes",
-    "imdbID",
-    "Type",
-    "DVD",
-    "BoxOffice",
-    "Production",
-    "Website",
-    "Response"
+        "Title",
+        "Year",
+        "Rated",
+        "Released",
+        "Runtime",
+        "Genre",
+        "Director",
+        "Writer",
+        "Actors",
+        "Plot",
+        "Language",
+        "Country",
+        "Awards",
+        "Poster",
+        "Ratings",
+        "Metascore",
+        "imdbRating",
+        "imdbVotes",
+        "imdbID",
+        "Type",
+        "DVD",
+        "BoxOffice",
+        "Production",
+        "Website",
+        "Response"
 })
 @Entity
 public class Movie {
@@ -66,7 +66,7 @@ public class Movie {
     private String actors;
 
     @JsonProperty("Plot")
-    @Size(max=8000)
+    @Size(max = 8000)
     private String plot;
     @JsonProperty("Language")
     private String language;
@@ -99,7 +99,6 @@ public class Movie {
     private String website;
     @JsonProperty("Response")
     private String response;
-
 
 
     @JsonProperty("Title")

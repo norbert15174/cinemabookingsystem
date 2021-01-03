@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public interface FilmShowRepository extends JpaRepository<FilmShow,Long> {
+public interface FilmShowRepository extends JpaRepository<FilmShow, Long> {
 
     @Query("select f from FilmShow f where (f.dateStart >= :dateS and f.dateStart <= :dateE) " +
             "or (f.dateEnd >= :dateS and f.dateEnd <= :dateE)" +
@@ -29,7 +29,7 @@ public interface FilmShowRepository extends JpaRepository<FilmShow,Long> {
     List<FilmShow> findAllFilmShow(@Param("localDate") LocalDateTime localDate);
 
     @Query("select f from FilmShow f left join fetch f.movie left join fetch f.room where f.dateStart >= :from and f.dateEnd < :to and f.movie.title like %:title% order by f.dateStart ASC ")
-    Optional<List<FilmShow>> findFilmShowByParameters(@Param("from") LocalDateTime from,@Param("to") LocalDateTime to,@Param("title") String title);
+    Optional<List<FilmShow>> findFilmShowByParameters(@Param("from") LocalDateTime from, @Param("to") LocalDateTime to, @Param("title") String title);
 
 
 }

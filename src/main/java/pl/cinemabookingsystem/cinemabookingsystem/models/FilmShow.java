@@ -20,10 +20,11 @@ public class FilmShow {
     @OneToMany(mappedBy = "filmShow", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<Spectator> spectators = new HashSet<>();
 
-    public void addNewSpectator(Spectator spectator){
+    public void addNewSpectator(Spectator spectator) {
         this.spectators.add(spectator);
     }
-    public void deleteSpectator(Spectator spectator){
+
+    public void deleteSpectator(Spectator spectator) {
         this.spectators.remove(spectator);
     }
 

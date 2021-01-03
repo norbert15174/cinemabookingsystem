@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import pl.cinemabookingsystem.cinemabookingsystem.models.CinemaUser;
 
 @Repository
-public interface CinemaUserRepository extends JpaRepository<CinemaUser,Long> {
+public interface CinemaUserRepository extends JpaRepository<CinemaUser, Long> {
     UserDetails findAllByUsername(String s);
 }

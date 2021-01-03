@@ -20,6 +20,7 @@ import java.util.Optional;
 public class MovieService {
     private MovieRepository movieRepository;
     private MovieController movieController;
+
     @Autowired
     public MovieService(MovieRepository movieRepository, MovieController movieController) {
         this.movieRepository = movieRepository;
@@ -27,36 +28,33 @@ public class MovieService {
     }
 
 
-    public ResponseEntity<Movie> findNewFilm(String title){
+    public ResponseEntity<Movie> findNewFilm(String title) {
         Movie movie = movieController.getNewTrack(title);
-        if(movie == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(movie,HttpStatus.OK);
+        if (movie == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(movie, HttpStatus.OK);
     }
 
-    public ResponseEntity<Movie> addNewFilm(String title){
+    public ResponseEntity<Movie> addNewFilm(String title) {
         Movie movie = movieController.getNewTrack(title);
-        if(movie == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        if(movieRepository.findFirstByTitle(title).isPresent()) return new ResponseEntity<>(HttpStatus.FOUND);
+        if (movie == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (movieRepository.findFirstByTitle(title).isPresent()) return new ResponseEntity<>(HttpStatus.FOUND);
         movieRepository.save(movie);
-        return new ResponseEntity<>(movie,HttpStatus.CREATED);
+        return new ResponseEntity<>(movie, HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Movie> findMovieInDB(String title){
+    public ResponseEntity<Movie> findMovieInDB(String title) {
         Optional<Movie> movie = movieRepository.findFirstByTitle(title);
-        if(movie.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(movie.get(),HttpStatus.OK);
+        if (movie.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(movie.get(), HttpStatus.OK);
     }
 
-    public Movie findMovieById(long id){
+    public Movie findMovieById(long id) {
         return movieRepository.findById(id).orElse(null);
     }
 
     public ResponseEntity<List<Movie>> findAllMovies() {
-        return new ResponseEntity<>(movieRepository.findAll(),HttpStatus.OK);
+        return new ResponseEntity<>(movieRepository.findAll(), HttpStatus.OK);
     }
-
-
-
 
 
 //    @EventListener(ApplicationReadyEvent.class)

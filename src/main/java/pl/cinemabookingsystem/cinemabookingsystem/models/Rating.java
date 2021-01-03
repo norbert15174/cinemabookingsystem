@@ -1,5 +1,6 @@
 
 package pl.cinemabookingsystem.cinemabookingsystem.models;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -12,8 +13,8 @@ import javax.persistence.Id;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "Source",
-    "Value"
+        "Source",
+        "Value"
 })
 @Entity
 public class Rating {

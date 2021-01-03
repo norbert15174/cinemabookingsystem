@@ -15,20 +15,24 @@ import java.util.List;
 public class RoomRestController {
 
     private RoomService roomService;
+
     @Autowired
     public RoomRestController(RoomService roomService) {
         this.roomService = roomService;
     }
+
     @PostMapping("/addroom")
-    public ResponseEntity<Room> addNewRoom(long roomSeat){
+    public ResponseEntity<Room> addNewRoom(long roomSeat) {
         return roomService.addNewRoom(roomSeat);
     }
+
     @GetMapping
-    public ResponseEntity<List<Room>> findAllRooms(){
+    public ResponseEntity<List<Room>> findAllRooms() {
         return roomService.findAllRooms();
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Room> findRoomById(@PathVariable long id){
+    public ResponseEntity<Room> findRoomById(@PathVariable long id) {
         return roomService.findRoomById(id);
     }
 

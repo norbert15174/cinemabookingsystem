@@ -31,27 +31,26 @@ public class MovieController {
     public MovieController() {
     }
 
-    public Movie getNewTrack(String title){
+    public Movie getNewTrack(String title) {
 
-       RestTemplate restTemplate = new RestTemplate();
-       MultiValueMap<String, String> headers = new HttpHeaders();
-       headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-
-
-       HttpEntity httpEntity = new HttpEntity(headers);
-
-       //get data from Api
-       JsonNode jsonNode = restTemplate.exchange("http://www.omdbapi.com/?t={title}&plot={full}&apikey={apiKey}", HttpMethod.GET, httpEntity, JsonNode.class,title,"full",key).getBody();
-       try{
-           if (jsonNode.isEmpty()) return null;
-       }catch (NullPointerException e){
-           return null;
-       }
+        RestTemplate restTemplate = new RestTemplate();
+        MultiValueMap<String, String> headers = new HttpHeaders();
+        headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
 
 
+        HttpEntity httpEntity = new HttpEntity(headers);
 
-       //Change data type
-       ObjectMapper objectMapper = new ObjectMapper();
+        //get data from Api
+        JsonNode jsonNode = restTemplate.exchange("http://www.omdbapi.com/?t={title}&plot={full}&apikey={apiKey}", HttpMethod.GET, httpEntity, JsonNode.class, title, "full", key).getBody();
+        try {
+            if (jsonNode.isEmpty()) return null;
+        } catch (NullPointerException e) {
+            return null;
+        }
+
+
+        //Change data type
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.readValue(jsonNode.toString(), Movie.class);
         } catch (JsonProcessingException e) {
@@ -60,7 +59,7 @@ public class MovieController {
         }
 
 
-   }
+    }
 
 
 }

@@ -16,26 +16,28 @@ import java.util.Optional;
 public class RoomService {
 
     RoomRepository roomRepository;
+
     @Autowired
     public RoomService(RoomRepository roomRepository) {
         this.roomRepository = roomRepository;
     }
 
-    public ResponseEntity<Room> addNewRoom(long seats){
-        try{
+    public ResponseEntity<Room> addNewRoom(long seats) {
+        try {
             Room room = roomRepository.save(new Room(seats));
-            return new ResponseEntity<>(room,HttpStatus.CREATED);
-        }catch (Exception e){
+            return new ResponseEntity<>(room, HttpStatus.CREATED);
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
 
     }
 
-    public ResponseEntity<List<Room>> findAllRooms(){
-        return new ResponseEntity<>(roomRepository.findAll(),HttpStatus.OK);
+    public ResponseEntity<List<Room>> findAllRooms() {
+        return new ResponseEntity<>(roomRepository.findAll(), HttpStatus.OK);
     }
-    public ResponseEntity<Room> findRoomById(long id){
+
+    public ResponseEntity<Room> findRoomById(long id) {
         Optional<Room> room = roomRepository.findById(id);
         return room.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElse(null);
     }
