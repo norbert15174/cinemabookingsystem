@@ -40,7 +40,6 @@ public class FilmShowService {
 
     public ResponseEntity<List<FilmShow>> findAllFilmShow() {
         List<FilmShow> asd = filmShowRepository.findAllFilmShow(LocalDateTime.now());
-        asd.forEach(a -> System.out.println(a.getId()));
         return new ResponseEntity<>(asd, HttpStatus.OK);
     }
 
