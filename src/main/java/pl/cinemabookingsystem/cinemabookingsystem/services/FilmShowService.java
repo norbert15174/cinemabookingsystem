@@ -51,8 +51,8 @@ public class FilmShowService {
         if (movie == null || room == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         String[] time = movie.getRuntime().split(" ", 2);
         filmShow.setDateEnd(filmShow.getDateStart().withSecond(0).plusMinutes(Integer.parseInt(time[0]) + 20));
-        if (filmShowRepository.findFilmShow(filmShow.getDateStart(), filmShow.getDateEnd(), roomId).isPresent())
-            return new ResponseEntity<>(HttpStatus.FOUND);
+        if (filmShowRepository.findFilmShow(filmShow.getDateStart(), filmShow.getDateEnd(), roomId).isPresent()) return new ResponseEntity<>(HttpStatus.FOUND);
+
         filmShow.setMovie(movie);
         filmShow.setRoom(room);
         try {
@@ -75,6 +75,7 @@ public class FilmShowService {
         if (filmShow.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         if (filmShow.get().getSpectators().stream().anyMatch(spect -> spect.getSeat() == spectator.getSeat()))
             return new ResponseEntity<>(HttpStatus.CONFLICT);
+        spectator.setLocalTime(LocalTime.now());
         filmShow.get().addNewSpectator(spectator);
         spectator.setFilmShow(filmShow.get());
         long spectatorId = spectatorRepository.save(spectator).getId();

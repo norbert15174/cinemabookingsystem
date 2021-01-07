@@ -39,11 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/movies/**").hasRole("ADMIN")
                 .and()
                 .addFilterBefore(new JwtFilter(cinemaUserRepository,passwordEncoderConfiguration), UsernamePasswordAuthenticationFilter.class);
-//                .antMatchers("/projects/**").hasAnyRole("ADMIN","USER")
-//                .antMatchers("/posts/**").hasAnyRole("ADMIN","USER")
-//                .antMatchers("/auth/**").hasAnyRole("ADMIN")
-//                .antMatchers("/swagger-ui").permitAll()
-//                .and()
+
 
 
         http.csrf().disable();
