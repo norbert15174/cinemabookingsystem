@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class RoomService {
 
-    RoomRepository roomRepository;
+    private RoomRepository roomRepository;
 
     @Autowired
     public RoomService(RoomRepository roomRepository) {
@@ -42,9 +42,5 @@ public class RoomService {
         return room.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElse(null);
     }
 
-//    @EventListener(ApplicationReadyEvent.class)
-//    public void init(){
-//        addNewRoom(60);
-//    }
 
 }
