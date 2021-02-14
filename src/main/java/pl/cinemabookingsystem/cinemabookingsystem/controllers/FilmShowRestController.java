@@ -50,8 +50,7 @@ public class FilmShowRestController {
 
     @GetMapping("confimation/{id}")
     public ResponseEntity confirmation(@PathVariable long id) {
-        filmShowService.setConfirmation(id);
-        return new ResponseEntity(HttpStatus.OK);
+        return filmShowService.setConfirmation(id);
     }
 
     @GetMapping("/reservation")

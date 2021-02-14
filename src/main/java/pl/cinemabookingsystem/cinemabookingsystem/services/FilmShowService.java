@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -92,24 +93,33 @@ public class FilmShowService {
 
     }
 
-    public void setConfirmation(long id) {
-        Spectator spectator = spectatorRepository.findSpectatorById(id).get();
-        spectator.setFilmShow(filmShowRepository.findFilmShowInformation(spectator.getFilmShow().getId()).get());
-        spectator.setBook(true);
-        spectatorRepository.save(spectator);
-        String content = "<h2>Your Reservation<h2><br>" +
-                "<h3>Email:" + spectator.getEmail() + " <h3>" +
-                "<h3>Imie:" + spectator.getName() + " <h3>" +
-                "<h3>Nazwisko:" + spectator.getSurname() + " <h3>" +
-                "<h3>Siedzenie:" + spectator.getSeat() + " <h3>" +
-                "<h3>Sala:" + spectator.getFilmShow().getRoom().getId() + " <h3>" +
-                "<h3>Film:" + spectator.getFilmShow().getMovie().getTitle() + " <h3>" +
-                "<h3>Godzina:" + spectator.getFilmShow().getDateStart() + " <h3>";
-        try {
-            mailSenderService.sendMail(spectator.getEmail(), "Reservation", content, true);
-        } catch (MessagingException e) {
-            e.printStackTrace();
+    public ResponseEntity setConfirmation(long id) {
+        try{
+            Spectator spectator = spectatorRepository.findSpectatorById(id).get();
+            spectator.setFilmShow(filmShowRepository.findFilmShowInformation(spectator.getFilmShow().getId()).get());
+            spectator.setBook(true);
+            spectatorRepository.save(spectator);
+            String content = "<h2>Your Reservation<h2><br>" +
+                    "<h3>Email:" + spectator.getEmail() + " <h3>" +
+                    "<h3>Imie:" + spectator.getName() + " <h3>" +
+                    "<h3>Nazwisko:" + spectator.getSurname() + " <h3>" +
+                    "<h3>Siedzenie:" + spectator.getSeat() + " <h3>" +
+                    "<h3>Sala:" + spectator.getFilmShow().getRoom().getId() + " <h3>" +
+                    "<h3>Film:" + spectator.getFilmShow().getMovie().getTitle() + " <h3>" +
+                    "<h3>Godzina:" + spectator.getFilmShow().getDateStart() + " <h3>";
+            try {
+                mailSenderService.sendMail(spectator.getEmail(), "Reservation", content, true);
+                return new ResponseEntity(HttpStatus.OK);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+                return new ResponseEntity(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            System.out.println("There is no seat reservation with this id");
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
+
+
     }
 
     public ResponseEntity<List<SpectatorDTO>> findSpectatorByEmail(String email) {
